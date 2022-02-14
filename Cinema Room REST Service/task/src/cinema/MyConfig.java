@@ -1,6 +1,8 @@
 package cinema;
 
 import cinema.tickets.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 import java.util.UUID;
@@ -9,7 +11,8 @@ import java.util.stream.IntStream;
 /**
  * класс реализует логику
  */
-public class ConfigBean {
+@Configuration
+public class MyConfig {
     private Ticket ticket;
     private int row = 1;
     private int column = 0;
@@ -19,6 +22,7 @@ public class ConfigBean {
      *
      * @return массив
      */
+    @Bean
     public Ticket[] getArrTicket() {
         return IntStream.range(0, 81)
                 .mapToObj(i -> {
@@ -48,11 +52,17 @@ public class ConfigBean {
      *
      * @return сгенерированный токен
      */
+    @Bean
     public Token getToken() {
         String strToken = UUID.randomUUID().toString();
         Token token = new Token();
         token.setToken(strToken);
         return token;
+    }
+
+    @Bean
+    public Seats seatsBean() {
+        return new Seats();
     }
 
     /**
@@ -62,6 +72,7 @@ public class ConfigBean {
      * @param seats купленное место
      * @return созданный ответ на покупку
      */
+    @Bean
     public TokenAndTicket getTokenAndTicket(Token token, Seats seats) {
         TokenAndTicket tokenAndTicket = new TokenAndTicket();
         tokenAndTicket.setToken(token.getToken());
@@ -81,6 +92,7 @@ public class ConfigBean {
      * @param token токен, который нам передали в запросе
      * @return обьект для возврата билета
      */
+    @Bean
     public ReturnTicket getReturnTicket(List<TokenAndTicket> list, Token token) {
         ReturnTicket returnTicket = null;
         for (TokenAndTicket tokenAndTicket : list) {
@@ -99,6 +111,7 @@ public class ConfigBean {
      * @param seats место, которое нам передали в запросе
      * @return ответ на доступность места(true/false)
      */
+    @Bean
     public boolean searchTicket(List<TokenAndTicket> list, Seats seats) {
         boolean res = false;
         for (TokenAndTicket tokenAndTicket : list) {
@@ -119,6 +132,7 @@ public class ConfigBean {
      * @param token токен билета
      * @return индекс
      */
+    @Bean
     public int getIndexListPurchasedTickets(List<TokenAndTicket> list, Token token) {
         int res = 0;
         for (int i = 0; i < list.size(); i++) {
@@ -136,6 +150,7 @@ public class ConfigBean {
      * @param list лист купленных билетов
      * @return обьект Statistic
      */
+    @Bean
     public Statistic getStatistic(List<TokenAndTicket> list) {
         int current_income = 0;
         int number_of_available_seats = 81 - list.size();

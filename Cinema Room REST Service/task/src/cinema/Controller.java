@@ -17,8 +17,8 @@ import java.util.List;
 public class Controller {
     private final int total_rows = 9;
     private final int total_columns = 9;
-    private final ConfigBean configBean = new ConfigBean();
-    private final Ticket[] available_seats = configBean.getArrTicket();
+    private final MyConfig myConfig = new MyConfig();
+    private final Ticket[] available_seats = myConfig.getArrTicket();
     private final List<TokenAndTicket> listPurchasedTickets = new ArrayList<>();
     private final InformTicket informSeats = new InformTicket(total_rows,
             total_columns, available_seats);
@@ -49,12 +49,12 @@ public class Controller {
             throw new NumberException("The number of a row" +
                     " or a column is out of bounds!");
         }
-        boolean purchasedTickets = configBean.searchTicket(listPurchasedTickets, seats);
+        boolean purchasedTickets = myConfig.searchTicket(listPurchasedTickets, seats);
         if (purchasedTickets) {
             throw new SeatsNotNumberException("The ticket has" +
                     " been already purchased!");
         } else {
-            tokenAndTicket = configBean.getTokenAndTicket(configBean.getToken(), seats);
+            tokenAndTicket = myConfig.getTokenAndTicket(myConfig.getToken(), seats);
             listPurchasedTickets.add(tokenAndTicket);
         }
         return tokenAndTicket;
@@ -68,12 +68,12 @@ public class Controller {
      */
     @PostMapping("/return")
     public ReturnTicket getReturnTicket(@RequestBody Token token) {
-        ReturnTicket returnTicket = configBean.getReturnTicket(listPurchasedTickets, token);
+        ReturnTicket returnTicket = myConfig.getReturnTicket(listPurchasedTickets, token);
         if (returnTicket == null) {
             throw new TokenNotFoundException("Wrong token!");
         } else {
             listPurchasedTickets.remove(
-                    configBean.getIndexListPurchasedTickets(listPurchasedTickets, token));
+                    myConfig.getIndexListPurchasedTickets(listPurchasedTickets, token));
         }
         return returnTicket;
     }
@@ -92,7 +92,7 @@ public class Controller {
         if (password == null) {
             throw new NoRightsException("The password is wrong!");
         } else {
-            statistic = configBean.getStatistic(listPurchasedTickets);
+            statistic = myConfig.getStatistic(listPurchasedTickets);
         }
         return statistic; 
     }

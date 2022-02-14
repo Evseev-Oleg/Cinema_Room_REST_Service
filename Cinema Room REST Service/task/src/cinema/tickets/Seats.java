@@ -1,5 +1,7 @@
 package cinema.tickets;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Objects;
 
 /**
@@ -12,6 +14,7 @@ public class Seats {
     public Seats() {
     }
 
+    @Autowired
     public Seats(int row, int column) {
         this.row = row;
         this.column = column;

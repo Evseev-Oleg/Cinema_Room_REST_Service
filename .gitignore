@@ -1,0 +1,28 @@
+# Project exclude paths
+/.gradle/
+/Cinema Room REST Service/task/build/
+/Cinema Room REST Service/task/out/
+/Cinema Room REST Service/task/out/production/classes/
+/Topics/Custom threads/Message notifier as a thread/out/
+/Topics/Custom threads/Message notifier as a thread/out/production/classes/
+/Topics/Custom threads/String processor/out/
+/Topics/Custom threads/String processor/out/production/classes/
+/Topics/Exception handling/Improve the program/build/
+/Topics/Getting data from REST/Retrieving specific task/build/
+/Topics/Getting data from REST/Return big JSON/build/
+/Topics/Getting data from REST/Return big JSON/out/
+/Topics/Getting data from REST/Return big JSON/out/production/classes/
+/Topics/Getting data from REST/Three endpoints/build/
+/Topics/Getting data from REST/Two endpoints/build/
+/Topics/Getting data from REST/Welcome/build/
+/Topics/Handling requests with bodies/Adding new functionality/build/
+/Topics/Handling requests with bodies/Important message/build/
+/Topics/Handling requests with bodies/Receiving and returning products/build/
+/Topics/Posting and deleting data via REST/Deleting items/build/
+/Topics/Posting and deleting data via REST/Return query parameter/build/
+/Topics/Posting and deleting data via REST/Storing user names/build/
+/Topics/Posting and deleting data via REST/Web calculator/build/
+/Topics/Thread management/Summing with threads/out/
+/Topics/Thread management/Summing with threads/out/production/classes/
+/Topics/Threads as objects/Is thread daemon/out/
+/Topics/Threads as objects/Is thread daemon/out/production/classes/
