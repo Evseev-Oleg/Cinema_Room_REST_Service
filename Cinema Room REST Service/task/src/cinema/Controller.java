@@ -5,6 +5,8 @@ import cinema.exception_handling.NumberException;
 import cinema.exception_handling.SeatsNotNumberException;
 import cinema.exception_handling.TokenNotFoundException;
 import cinema.tickets.*;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -14,9 +16,12 @@ import java.util.List;
  * контроллер запросов
  */
 @RestController
+@PropertySource("classpath:myApp.properties")
 public class Controller {
-    private final int total_rows = 9;
-    private final int total_columns = 9;
+    @Value("${total.rows}")
+    private int total_rows;
+    @Value("${total.columns}")
+    private int total_columns;
     private final MyConfig myConfig = new MyConfig();
     private final Ticket[] available_seats = myConfig.getArrTicket();
     private final List<TokenAndTicket> listPurchasedTickets = new ArrayList<>();
@@ -80,7 +85,7 @@ public class Controller {
 
     /**
      * запрос на статистику купленных билетов, выручку от продажи и свободных местах
-     * запрос делается с параметром в URL ключом доступом к статистике
+     * запрос делается с параметром в URL, ключом(password) доступом к статистике
      * сейчас метод требует просто введения любого password, но можно определить пароль для входа
      *
      * @param password пароль
